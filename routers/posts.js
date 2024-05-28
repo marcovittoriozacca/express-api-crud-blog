@@ -3,6 +3,8 @@ const router = express.Router();
 //posts controller
 const posts = require('../controllers/posts.js');
 
+const {deletePostCheck} = require('../middlewares/deletePostCheck.js');
+
 //default route for posts
 router.get('/', posts.index);
 
@@ -14,6 +16,9 @@ router.post('/', posts.create);
 
 //download route to download the single post image
 router.get('/:slug/download', posts.download);
+
+//destroy route to delete a given post
+router.delete('/:slug', deletePostCheck, posts.destroy);
 
 
 module.exports = router;

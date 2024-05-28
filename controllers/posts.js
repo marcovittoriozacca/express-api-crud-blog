@@ -100,9 +100,17 @@ const download = (req, res) => {
     }
 
 }
+
+const destroy = (req, res) => {
+    res.format({
+        html: () => res.redirect("/posts"),
+        default: () => res.send("Post eliminato")
+    })
+};
 module.exports = {
     index,
     show,
     create,
-    download
+    download,
+    destroy,
 }
