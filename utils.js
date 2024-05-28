@@ -32,10 +32,21 @@ const checkElementInArray = (array, element, elementToCheck) => {
     }
 }
 
+const updateJSON = (fileName, data) => {
+    const filePath = path.join(__dirname, 'database', `${fileName}.json`);
+    const fileJSON = JSON.parse(fs.readFileSync(filePath));
+    const updatedJSONFile = [...fileJSON, data];
+    const string = JSON.stringify(updatedJSONFile, null, 2);
+    fs.writeFileSync(filePath, string);
+
+    return updatedJSONFile;
+}
+
 
 module.exports = {
     showLink,
     getTemplate,
     generateSlug,
-    checkElementInArray
+    checkElementInArray,
+    updateJSON
 }

@@ -1,7 +1,7 @@
-const postsList = require('../database/db.json');
+let postsList = require('../database/db.json');
 const path = require('path');
 const fs = require('fs');
-const {showLink, getTemplate, generateSlug} = require('../utils.js');
+const {showLink, getTemplate, generateSlug,updateJSON} = require('../utils.js');
 //index controller for the route /posts
 
 let html = getTemplate('template');
@@ -64,6 +64,8 @@ const create = (req, res) => {
             image,
             tags,
         };
+
+        postsList = updateJSON('db', newPost);
 
         res.format({
             json: () => {            
