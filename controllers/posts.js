@@ -1,7 +1,7 @@
 let postsList = require('../database/db.json');
 const path = require('path');
 const fs = require('fs');
-const {showLink, getTemplate, generateSlug,updateJSON} = require('../utils.js');
+const {showLink, getTemplate, generateSlug,updateJSON,deletePostImage} = require('../utils.js');
 //index controller for the route /posts
 
 let html = getTemplate('template');
@@ -104,9 +104,13 @@ const download = (req, res) => {
 }
 
 const destroy = (req, res) => {
+
+
+
     const newJSON = postsList.filter(e => e.slug !== req.params.slug);
 
     updateJSON('db', newJSON);
+    deletePostImage(req.params.slug);
 
     res.format({
         html: () => res.redirect("/posts"),

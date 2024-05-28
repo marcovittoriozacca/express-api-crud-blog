@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const postsList = require('./database/db.json');
 
 
 const showLink = (req, element) => {
@@ -40,11 +41,19 @@ const updateJSON = (fileName, data) => {
     return data;
 }
 
+const deletePostImage = (slug) => {
+    const element = postsList.filter(e => e.slug === slug);
+    console.log(element[0].image);
+    const filePath = path.join(__dirname, 'public', 'imgs', 'posts', element[0].image);
+    fs.unlinkSync(filePath);
+}
+
 
 module.exports = {
     showLink,
     getTemplate,
     generateSlug,
     checkElementInArray,
-    updateJSON
+    updateJSON,
+    deletePostImage
 }
