@@ -10,7 +10,7 @@ router.get('/', posts.index);
 router.get('/:slug', posts.show);
 
 //create route - at the moment its just displays an h1
-router.post('/create', posts.create);
+router.post('/', posts.create);
 
 //download route to download the single post image
 router.get('/:slug/download', posts.download);

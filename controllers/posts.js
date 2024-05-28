@@ -1,7 +1,7 @@
 const postsList = require('../database/db.js');
 const path = require('path');
 const fs = require('fs');
-const {showLink, getTemplate} = require('../utils.js');
+const {showLink, getTemplate, generateSlug} = require('../utils.js');
 //index controller for the route /posts
 
 let html = getTemplate('template');
@@ -45,14 +45,42 @@ const show = (req, res) => {
 
 //create controller - at the moment its just displays an h1
 const create = (req, res) => {
-    res.format({
-        html: () => {
-            res.send('<h1>Creazione nuovo post</h1>')
-        },
-        default: () => {
-            res.status(406).send('Error 406 - Not Acceptable')
-        }
-    })
+
+    const {title, content, image, tags} = req.body;
+    if(!title || !content || !image || !tags){
+        res.format({
+            json: () => res.status(400).send({
+                            success: false,
+                            error: "One or more information are missing"
+                        }),
+            html: () => {res.status(400).send("<h1>One or more information are missing</h1>")}
+        })
+    }else{
+        const slug = generateSlug(title);
+        const newPost = {
+            title,
+            slug,
+            content,
+            image,
+            tags,
+        };
+
+        res.format({
+            json: () => {            
+                res.send({
+                    success: true,
+                    statusCode: 200,
+                    newPost
+                });
+            },
+            html: () => {
+                res.redirect('/posts');
+            },
+            default: () => {
+                res.status(406).send('Error 406 - Not Acceptable')
+            }
+        })
+    }
 }
 
 //download route to download the single post image

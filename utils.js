@@ -10,8 +10,14 @@ const getTemplate = (name) => {
     return fs.readFileSync(filePath).toString();
 }
 
+const generateSlug = (name) => {
+    let slug = name.trim().replaceAll(" ", "-").replaceAll("/", "-").toLowerCase();
+    return slug;
+}
+
 
 module.exports = {
     showLink,
-    getTemplate
+    getTemplate,
+    generateSlug
 }

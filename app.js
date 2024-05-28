@@ -8,6 +8,8 @@ app.use(express.static('public'));
 const port = process.env.PORT || 3000;
 const host = process.env.host || "localhost";
 
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
     res.send('<h1>Pagina Iniziale</h1>');
 })
