@@ -45,9 +45,9 @@ const show = (req, res) => {
 
 //create controller - at the moment its just displays an h1
 const create = (req, res) => {
-
-    const {title, content, image, tags} = req.body;
-    if(!title || !content || !image || !tags){
+    console.log(req.body, req.file);
+    const {title, content, tags} = req.body;
+    if(!title || !content || !tags || !req.file){
         res.format({
             json: () => res.status(400).send({
                             success: false,
@@ -61,7 +61,7 @@ const create = (req, res) => {
             title,
             slug,
             content,
-            image,
+            image: `${req.file.filename}`,
             tags,
         };
 
