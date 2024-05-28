@@ -1,4 +1,4 @@
-const postsList = require('../database/db.js');
+const postsList = require('../database/db.json');
 const path = require('path');
 const fs = require('fs');
 const {showLink, getTemplate, generateSlug} = require('../utils.js');

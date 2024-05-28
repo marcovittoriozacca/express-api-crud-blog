@@ -1,5 +1,5 @@
 const {checkElementInArray} = require('../utils.js');
-const postsList = require('../database/db.js');
+const postsList = require('../database/db.json');
 
 const deletePostCheck = (req, res, next) => {
     const slug = req.params.slug;
