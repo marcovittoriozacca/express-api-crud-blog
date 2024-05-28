@@ -5,6 +5,8 @@ const posts = require('./routers/posts.js');
 const app = express();
 app.use(express.static('public'));
 
+const errorManager = require('./middlewares/errorManager.js');
+
 const port = process.env.PORT || 3000;
 const host = process.env.host || "localhost";
 
@@ -15,7 +17,10 @@ app.get('/', (req, res) => {
 })
 
 // /posts route with posts router using posts controller
-app.use('/posts', posts);
+app.use('/posts' ,posts);
+
+//middleware to handle errors
+app.use(errorManager);
 
 app.listen(port, host, () => {
     console.log(`Server avviato su: http://${host}:${port}`);
