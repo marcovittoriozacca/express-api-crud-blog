@@ -56,5 +56,16 @@
       "Ricette vegetariane",
       "Ricette al forno"
     ]
+  },
+  {
+    "title": "pizza super buona",
+    "slug": "pizza-super-buona-2",
+    "content": "pizza buonissima mamma mia che buona",
+    "image": "45ead1445f740041150442f76d8af17f",
+    "tags": [
+      "ciao",
+      "salsa",
+      "rucola"
+    ]
   }
 ]

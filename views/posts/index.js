@@ -5,7 +5,7 @@ module.exports = (req, postsList, showLink) => {
             <ul>
                 ${postsList.map(p => `
                 <li>
-                    <a class="flex flex-col gap-y-5" href="${showLink(req, p.title)}">
+                    <a class="flex flex-col gap-y-5" href="${showLink(req, p.slug)}">
                         <h2 class="text-3xl font-semibold text-blue-500">${p.title}</h2>
                         <p>${p.content}</p>
                         <figure class="w-52 rounded-md overflow-hidden">
