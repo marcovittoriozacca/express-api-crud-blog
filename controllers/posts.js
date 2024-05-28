@@ -65,7 +65,7 @@ const create = (req, res) => {
             tags,
         };
 
-        postsList = updateJSON('db', newPost);
+        postsList = updateJSON('db', [...postsList, newPost]);
 
         res.format({
             json: () => {            
@@ -104,6 +104,10 @@ const download = (req, res) => {
 }
 
 const destroy = (req, res) => {
+    const newJSON = postsList.filter(e => e.slug !== req.params.slug);
+
+    updateJSON('db', newJSON);
+
     res.format({
         html: () => res.redirect("/posts"),
         default: () => res.send("Post eliminato")
