@@ -48,6 +48,11 @@ const create = (req, res) => {
     console.log(req.body, req.file);
     const {title, content, tags} = req.body;
     if(!title || !content || !tags || !req.file){
+
+        const filePath = path.join(__dirname, '..', 'public', 'imgs', 'posts', `${req.file.filename}`);
+        fs.unlinkSync(filePath);
+        
+
         res.format({
             json: () => res.status(400).send({
                             success: false,
