@@ -13,7 +13,7 @@ const getTemplate = (name) => {
 }
 
 const generateSlug = (name) => {
-    let slug = name
+    let baseSlug = name
                 .toString()
                 .toLowerCase()
                 .normalize('NFD')
@@ -22,6 +22,15 @@ const generateSlug = (name) => {
                 .replace(/[^\w\-]+/g, '')
                 .replace(/\-\-+/g, '-');
 
+
+    let slug = baseSlug;
+    let counter = 1;
+    const slugsList = postsList.map(p => p.slug);
+
+    while(slugsList.includes(slug)){
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+    }
     return slug;
 }
 
