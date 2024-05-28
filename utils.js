@@ -13,7 +13,15 @@ const getTemplate = (name) => {
 }
 
 const generateSlug = (name) => {
-    let slug = name.trim().replaceAll(" ", "-").replaceAll("/", "-").toLowerCase();
+    let slug = name
+                .toString()
+                .toLowerCase()
+                .normalize('NFD')
+                .trim()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-');
+
     return slug;
 }
 
